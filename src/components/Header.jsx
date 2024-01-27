@@ -2,16 +2,18 @@ import React from "react";
 import Logo from "../img/logo.png";
 import userIcon from "../img/avatar.png";
 import { MdShoppingBasket } from "react-icons/md";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   return (
     <header className="fixed z-50 w-screen p-6 px-16">
       {/* Desktop and Tablet */}
       <div className="hidden md:flex w-full h-full gap-8">
-        <div className="flex items-center gap-2">
+        <Link to={'/'} className="flex items-center gap-2">
           <img src={Logo} className="w-8 object-cover gap-2" alt="Logo" />
           <p className="text-headingColor text-xl font-bold"> City</p>
-        </div>
+        </Link>
         <ul className="flex items-center gap-8 ml-auto">
           <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
             Home
@@ -28,12 +30,13 @@ export const Header = () => {
         </ul>
         <div className="relative flex items-center content-center">
           <MdShoppingBasket className="text-textColor h-6 w-6" />
-          <div className="w-6 h-6 bg-red-500 rounded-full flex justify-center items-center absolute -top-0 -right-3">
-            <p className="text-textColor font-normal text-sm">1</p>
+          <div className="w-5 h-5 bg-red-500 rounded-full flex justify-center items-center absolute -top-0 -right-3">
+            <p className="text-white font-normal text-xs">1</p>
           </div>
         </div>
         <div>
-          <img
+          <motion.img
+            whileTap={{scale:0.6}}
             src={userIcon}
             alt="User"
             className="w-8 h-8 drop-shadow-xl cursor-pointer"
