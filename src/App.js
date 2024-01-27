@@ -4,8 +4,11 @@ import { Header } from './components'
 
 const App = () => {
   return (
-    <div className='flex text-blue-600'>
-    <Header/>
+    <div className='w-screen h-auto flex flex-col'>
+      <Header/>
+      <main>
+        
+      </main>
     </div>
   )
 }
