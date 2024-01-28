@@ -9,6 +9,9 @@ import {
 } from "react-icons/md";
 import { categories } from "../utils/data";
 import Loader from "./Lodar";
+import { motion } from "framer-motion";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { storage } from "../firebase.config";
 
 const CreateContainer = () => {
   const [title, setTitle] = useState("");
@@ -23,17 +26,59 @@ const CreateContainer = () => {
 
   // title, category, upload, calories, price
 
-  const uploadImage = () => {};
+  const uploadImage = (e) => {
+    setIsLoading(true);
+    const imageFile = e.target.files[0];
+    const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, imageFile);
+
+    uploadTask.on("state_changed", (snapshot) => {
+      const uploadProgress =
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    }, (error)=>{
+      console.log(error);
+      setFields(true)
+      setMsg('Error while uploading: Try Again');
+      setAlertStatus('danger');
+      setTimeout(()=>{
+        setFields(false)
+        setIsLoading(false)
+      },4000)
+    }, ()=>{
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
+        setImageAsset(downloadURL);
+        setIsLoading(false)
+        setFields(true)
+        setMsg("Image uploaded successfully");
+        setAlertStatus('success');
+        setTimeout(()=>{
+          setFields(false)
+        },4000)
+      })
+    });
+  };
 
   const deleteImage = () => {};
 
-  const saveDetails = () =>{
-    
-  }
+  const saveDetails = () => {};
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center">
       <div className="w-[90%] md:w-[50%] border border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center gap-4">
+        {fields && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={`w-full p-2 rounded-lg text-center text-lg font-semibold ${
+              alertStatus === "danger"
+                ? "bg-red-400 text-red-800"
+                : "bg-emerald-400 text-emerald-800"
+            }`}
+          >
+            {msg}
+          </motion.p>
+        )}
         <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
           <MdFastfood className="text-xl text-gray-700" />
           <input
