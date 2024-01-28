@@ -7,15 +7,22 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {app} from '../firebase.config'
 
 import { Link } from "react-router-dom";
+import { useStateValue } from "../context/StateProvider";
+import { actionType } from "../context/reducer";
 
 export const Header = () => {
 
     const firebaseAuth = getAuth(app);
     const provider = new GoogleAuthProvider();
+    const[{user}, dispatch] = useStateValue();
 
     const login = async () =>{
-        const response = await signInWithPopup(firebaseAuth, provider);
-        console.log(response);
+        const {user:{refreshToken, providerData}} = await signInWithPopup(firebaseAuth, provider);
+        dispatch({
+            type:actionType.SET_USER,
+            user:providerData[0]
+        })
+        localStorage.setItem('user', JSON.stringify(providerData[0]))
     }
 
   return (
@@ -50,9 +57,9 @@ export const Header = () => {
           <motion.img
             onClick={login}
             whileTap={{scale:0.6}}
-            src={userIcon}
+            src={user? user.photoURL : userIcon}
             alt="User"
-            className="w-8 h-8 drop-shadow-xl cursor-pointer"
+            className="w-8 h-8 drop-shadow-xl cursor-pointer rounded-full"
           />
         </div>
       </div>
