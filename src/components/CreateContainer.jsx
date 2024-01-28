@@ -10,8 +10,9 @@ import {
 import { categories } from "../utils/data";
 import Loader from "./Lodar";
 import { motion } from "framer-motion";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../firebase.config";
+import { saveItem } from "../utils/firebaseFunctions";
 
 const CreateContainer = () => {
   const [title, setTitle] = useState("");
@@ -58,9 +59,74 @@ const CreateContainer = () => {
     });
   };
 
-  const deleteImage = () => {};
+  const deleteImage = () => {
+    setIsLoading(true);
+    const deleteRef = ref(storage, imageAsset);
+    deleteObject(deleteRef).then(()=>{
+      setImageAsset(null);
+      setIsLoading(false);
+      setFields(true);
+      setMsg("Image deleted successfully");
+      setAlertStatus('success');
+      setTimeout(()=>{
+        setFields(false);
+      },4000)
+    })
+  };
 
-  const saveDetails = () => {};
+  const saveDetails = () => {
+    setIsLoading(true);
+    try {
+      if (!title || !calories || !imageAsset || !price || !category) {
+        setFields(true);
+        setMsg("Required fields can't be empty");
+        setAlertStatus("danger");
+        setTimeout(() => {
+          setFields(false);
+          setIsLoading(false);
+        }, 4000);
+      } else {
+        const data = {
+          id: `${Date.now()}`,
+          title: title,
+          imageURL: imageAsset,
+          category: category,
+          calories: calories,
+          qty: 1,
+          price: price,
+        };
+        saveItem(data);
+        setIsLoading(false);
+        setFields(true);
+        setMsg("Data Uploaded successfully 😊");
+        setAlertStatus("success");
+        setTimeout(() => {
+          setFields(false);
+        }, 4000);
+        clearData();
+      }
+    } catch (error) {
+      setFields(true);
+      setMsg("Error while uploading : Try AGain 🙇");
+      setAlertStatus("danger");
+      setTimeout(() => {
+        setFields(false);
+        setIsLoading(false);
+      }, 4000);
+    }
+
+    // fetchData();
+  };
+
+
+  const clearData = () => {
+    setTitle("");
+    setImageAsset(null);
+    setCalories("");
+    setPrice("");
+    setCategory("Select Category");
+  };
+
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center">
