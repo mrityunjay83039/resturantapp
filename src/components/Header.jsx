@@ -3,9 +3,21 @@ import Logo from "../img/logo.png";
 import userIcon from "../img/avatar.png";
 import { MdShoppingBasket } from "react-icons/md";
 import { motion } from "framer-motion";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {app} from '../firebase.config'
+
 import { Link } from "react-router-dom";
 
 export const Header = () => {
+
+    const firebaseAuth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    const login = async () =>{
+        const response = await signInWithPopup(firebaseAuth, provider);
+        console.log(response);
+    }
+
   return (
     <header className="fixed z-50 w-screen p-6 px-16">
       {/* Desktop and Tablet */}
@@ -34,8 +46,9 @@ export const Header = () => {
             <p className="text-white font-normal text-xs">1</p>
           </div>
         </div>
-        <div>
+        <div className="relative">
           <motion.img
+            onClick={login}
             whileTap={{scale:0.6}}
             src={userIcon}
             alt="User"
