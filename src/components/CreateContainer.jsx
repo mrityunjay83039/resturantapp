@@ -12,7 +12,9 @@ import Loader from "./Lodar";
 import { motion } from "framer-motion";
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../firebase.config";
-import { saveItem } from "../utils/firebaseFunctions";
+import { getAllFoodItems, saveItem } from "../utils/firebaseFunctions";
+import { useStateValue } from "../context/StateProvider";
+import { actionType } from "../context/reducer";
 
 const CreateContainer = () => {
   const [title, setTitle] = useState("");
@@ -24,6 +26,7 @@ const CreateContainer = () => {
   const [alertStatus, setAlertStatus] = useState("danger");
   const [msg, setMsg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [{setItems}, dispatch] = useStateValue();
 
   // title, category, upload, calories, price
 
@@ -99,11 +102,12 @@ const CreateContainer = () => {
         setIsLoading(false);
         setFields(true);
         setMsg("Data Uploaded successfully 😊");
+        clearData();
         setAlertStatus("success");
         setTimeout(() => {
           setFields(false);
         }, 4000);
-        clearData();
+        
       }
     } catch (error) {
       setFields(true);
@@ -115,7 +119,7 @@ const CreateContainer = () => {
       }, 4000);
     }
 
-    // fetchData();
+    fetchData();
   };
 
 
@@ -125,6 +129,15 @@ const CreateContainer = () => {
     setCalories("");
     setPrice("");
     setCategory("Select Category");
+  };
+
+  const fetchData = async () => {
+    await getAllFoodItems().then((data) => {
+      dispatch({
+        type: actionType.SET_FOOD_ITEMS,
+        foodItems: data,
+      });
+    });
   };
 
 
