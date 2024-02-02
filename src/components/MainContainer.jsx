@@ -4,6 +4,7 @@ import { MenuContainer, RowContainer } from "./";
 import { useStateValue } from "../context/StateProvider";
 import { MdChevronRight, MdChevronLeft } from "react-icons/md";
 import { motion } from "framer-motion";
+import { categories } from "../utils/data";
 
 const MainContainer = () => {
   const [{ foodItems }, dispatch] = useStateValue();
@@ -36,7 +37,7 @@ const MainContainer = () => {
           </div>
         </div>
         <RowContainer
-          foodItems={foodItems}
+          foodItems={foodItems && foodItems.filter((e)=>e?.category === 'fruits')}
           scrollValue={scrollValue}
           flag={true}
         />
