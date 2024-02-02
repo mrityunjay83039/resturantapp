@@ -15,7 +15,7 @@ const RowContainer = ({ foodItems, scrollValue, flag }) => {
       ref={rowContainer}
       className={`w-full flex items-center gap-3  my-12 scroll-smooth  ${
         flag
-          ? "overflow-x-scroll scrollbar-none"
+          ? "overflow-x-scroll no-scrollbar"
           : "overflow-x-hidden flex-wrap justify-center"
       }`}>
       {foodItems &&
@@ -30,7 +30,7 @@ const RowContainer = ({ foodItems, scrollValue, flag }) => {
                   whileHover={{ scale: 1.2 }}>
                   <img
                     src={foodItem?.imageURL}
-                    alt=""
+                    alt={foodItem.title}
                     className="w-full h-full object-contain"
                   />
                 </motion.div>
