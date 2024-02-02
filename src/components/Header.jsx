@@ -13,7 +13,7 @@ import { actionType } from "../context/reducer";
 export const Header = () => {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, cartItems }, dispatch] = useStateValue();
   const [isMenu, setIsMenu] = useState(false);
 
   const login = async () => {
@@ -64,9 +64,11 @@ export const Header = () => {
         </ul>
         <div className="relative flex items-center content-center">
           <MdShoppingBasket className="text-textColor h-6 w-6" />
+          {cartItems && cartItems.length > 0 && (
           <div className="w-5 h-5 bg-red-500 rounded-full flex justify-center items-center absolute -top-0 -right-3">
-            <p className="text-white font-normal text-xs">1</p>
-          </div>
+            <p className="text-white font-normal text-xs">{cartItems.length}</p>
+          </div>)
+          }
         </div>
         <div className="relative">
           <motion.img

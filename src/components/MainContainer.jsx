@@ -9,7 +9,6 @@ import { categories } from "../utils/data";
 const MainContainer = () => {
   const [{ foodItems }, dispatch] = useStateValue();
   const [scrollValue, setScrollValue] = useState(0);
-  console.log(foodItems);
 
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center bg-primary">
