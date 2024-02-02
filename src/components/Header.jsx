@@ -13,7 +13,7 @@ import { actionType } from "../context/reducer";
 export const Header = () => {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
-  const [{ user, cartItems }, dispatch] = useStateValue();
+  const [{ user, cartItems, cartShow }, dispatch] = useStateValue();
   const [isMenu, setIsMenu] = useState(false);
 
   const login = async () => {
@@ -40,6 +40,13 @@ export const Header = () => {
     });
   };
 
+  const showCart = ()=>{
+    dispatch({
+      type:actionType.SET_SHOW_CART,
+      cartShow: !cartShow,
+    })
+  }
+
   return (
     <header className="fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16 bg-primary">
       {/* Desktop and Tablet */}
@@ -62,7 +69,7 @@ export const Header = () => {
             Service
           </li>
         </ul>
-        <div className="relative flex items-center content-center">
+        <div onClick={showCart} className="pointer relative flex items-center content-center">
           <MdShoppingBasket className="text-textColor h-6 w-6" />
           {cartItems && cartItems.length > 0 && (
           <div className="w-5 h-5 bg-red-500 rounded-full flex justify-center items-center absolute -top-0 -right-3">
@@ -108,11 +115,14 @@ export const Header = () => {
 
       {/* For Moile device */}
       <div className="flex justify-between md:hidden">
-        <div className="relative flex items-center content-center">
+        <div onClick={showCart} className="pointer relative flex items-center content-center">
           <MdShoppingBasket className="text-textColor h-6 w-6" />
+          
+          {cartItems && cartItems.length > 0 && (
           <div className="w-5 h-5 bg-red-500 rounded-full flex justify-center items-center absolute -top-0 -right-3">
-            <p className="text-white font-normal text-xs">1</p>
-          </div>
+            <p className="text-white font-normal text-xs">{cartItems.length}</p>
+          </div>)
+          }
         </div>
         <Link to={"/"} className="flex items-center gap-2">
           <img src={Logo} className="w-8 object-cover gap-2" alt="Logo" />

@@ -7,4 +7,5 @@ export const initialState = {
     user:userInfo,
     foodItems:null,
     cartItems:cartInfo,
+    cartShow:false,
 }
