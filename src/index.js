@@ -13,9 +13,9 @@ const root = createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <StateProvider initialState={initialState} reducer={reducer}>      
-      <StrictMode>
+      {/* <StrictMode> */}
       <App />
-      </StrictMode>
+      {/* </StrictMode> */}
     </StateProvider>
   </BrowserRouter>
 );
