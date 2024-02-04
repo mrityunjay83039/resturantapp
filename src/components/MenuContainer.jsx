@@ -17,7 +17,7 @@ const MenuContainer = () => {
           Our Hot Dishes
         </p>
 
-        <div className="w-full flex items-center justify-start lg:justify-center gap-8 py-6 overflow-x-scroll scrollbar-none">
+        <div className="w-full flex items-center justify-start lg:justify-center gap-8 py-6 overflow-x-scroll no-scrollbar">
           {categories &&
             categories.map((category) => (
               <motion.div

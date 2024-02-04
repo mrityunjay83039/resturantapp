@@ -30,3 +30,35 @@ html,body{
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #282a2c;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(200,35,48);
+background: linear-gradient(90deg, rgba(200,35,48,1) 0%, rgba(171,85,40,1) 100%);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(200,35,48);
+background: linear-gradient(90deg, rgb(168, 51, 61) 0%, rgb(143, 83, 51) 100%);
+cursor: pointer;
+}
+
+#cart-container ::-webkit-scrollbar {
+  width: 10px;
+}
+
+#cart-container ::-webkit-scrollbar-thumb{
+  background: #5a5a5a;
+}
