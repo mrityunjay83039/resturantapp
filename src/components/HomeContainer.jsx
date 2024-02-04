@@ -51,7 +51,7 @@ const HomeContainer = () => {
             {heroData &&
               heroData.map((n) => (
                 <div
-                  key={n.id}
+                  key={n.name+'hero'}
                   className="xs:w-[47%]  xl:w-190  p-4 bg-cardOverlay backdrop-blur-md rounded-3xl flex flex-col items-center justify-center drop-shadow-lg">
                   <img
                     src={n.imageSrc}
