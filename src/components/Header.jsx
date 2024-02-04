@@ -62,7 +62,7 @@ export const Header = () => {
           >
             Home
           </Link>
-          <Link
+          {/* <Link
             to={"/menu"}
             className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer"
           >
@@ -79,7 +79,7 @@ export const Header = () => {
             className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer"
           >
             Service
-          </Link>
+          </Link> */}
         </ul>
         <div
           onClick={showCart}
@@ -178,7 +178,7 @@ export const Header = () => {
                 >
                   Home
                 </Link>
-                <Link
+                {/* <Link
                   to={"/menu"}
                   onClick={() => setIsMenu(false)}
                   className=" px-4 py-2 text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out  hover:bg-slate-100 cursor-pointer"
@@ -198,7 +198,7 @@ export const Header = () => {
                   className=" px-4 py-2 text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out  hover:bg-slate-100 cursor-pointer"
                 >
                   Service
-                </Link>
+                </Link> */}
               </ul>
 
               <p
