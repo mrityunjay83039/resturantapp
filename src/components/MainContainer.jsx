@@ -4,7 +4,7 @@ import { MenuContainer, RowContainer, CartContainer } from "./";
 import { useStateValue } from "../context/StateProvider";
 import { MdChevronRight, MdChevronLeft } from "react-icons/md";
 import { motion } from "framer-motion";
-import { categories } from "../utils/data";
+
 
 const MainContainer = () => {
   const [{ foodItems, cartShow }, dispatch] = useStateValue();

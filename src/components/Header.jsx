@@ -94,8 +94,9 @@ export const Header = () => {
             </div>
           )}
         </div>
-        <motion.div onClick={login} whileTap={{ scale: 0.6 }} className="relative">
+        <div className="relative">
           <motion.img
+            onClick={login} whileTap={{ scale: 0.6 }}
             src={user ? user.photoURL : userIcon}
             alt="User"
             className="w-8 h-8 drop-shadow-xl cursor-pointer rounded-full"
@@ -125,7 +126,7 @@ export const Header = () => {
               </p>
             </motion.div>
           )}
-        </motion.div>
+        </div>
       </div>
 
       {/* For Moile device */}
@@ -148,8 +149,9 @@ export const Header = () => {
           <img src={Logo} className="w-8 object-cover gap-2" alt="Logo" />
           <p className="text-headingColor text-xl font-bold"> City</p>
         </Link>
-        <motion.div onClick={login} whileTap={{ scale: 0.6 }} className="relative">
+        <div className="relative">
           <motion.img
+             onClick={login} whileTap={{ scale: 0.6 }}
             src={user ? user.photoURL : userIcon}
             alt="User"
             className="w-8 h-8 drop-shadow-xl cursor-pointer rounded-full"
@@ -209,7 +211,7 @@ export const Header = () => {
               </p>
             </motion.div>
           )}
-        </motion.div>
+        </div>
       </div>
     </header>
   );

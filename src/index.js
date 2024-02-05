@@ -6,7 +6,7 @@ import App from "./App";
 import { StateProvider } from "./context/StateProvider";
 import { initialState } from "./context/initialState";
 import reducer from "./context/reducer";
-import { StrictMode } from 'react';
+
 
 const root = createRoot(document.getElementById("root"));
 
